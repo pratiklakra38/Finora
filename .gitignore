@@ -1,0 +1,23 @@
+# Local dependencies, temporary files and generated reports
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+coverage/
+test-results/
+playwright-report/
+
+# Design, presentation and assessment assets are outside this website repository
+01_Figma_Design/
+03_HCI_Documentation/
+04_Canva_Presentation_Assets/
+05_PPT_Presentation/
+qa/
+*.zip
+*.pptx
+*.pdf
+*.docx
+*.fig
