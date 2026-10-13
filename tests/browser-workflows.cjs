@@ -2,8 +2,8 @@ const {chromium}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
 const assert=require('node:assert/strict');
-const root=require('node:path').resolve(__dirname,'../..');
-fs.mkdirSync(root+'/03_HCI_Documentation',{recursive:true});
+const root=require('node:path').resolve(__dirname,'../test-results/browser-workflows');
+fs.mkdirSync(root,{recursive:true});
 const reports=[];
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
@@ -14,7 +14,7 @@ const reports=[];
  const go=async(route)=>{const url='http://127.0.0.1:4173/#'+route;await page.goto(url);if(await page.locator('#login-form').count()){await page.locator('#auth-email').fill('demo@finora.com');await page.locator('#auth-password').fill('Finora@123');await page.locator('#login-form button[type=submit]').click();await page.waitForSelector('.sidebar');await page.goto(url);}await page.evaluate(()=>document.fonts.ready);};
  const test=async(name,fn)=>{try{await fn();reports.push({name,status:'PASS'});console.log(`PASS ${name}`);}catch(e){reports.push({name,status:'FAIL',detail:e.message});console.log(`FAIL ${name}: ${e.message}`);throw e;}};
  const add=async(description,amount,type='expense')=>{await page.locator('[data-action="new-transaction"]').click();if(type==='income')await page.locator('input[name="type"][value="income"]').check();await page.locator('#field-description').fill(description);await page.locator('#field-amount').fill(amount);await page.locator('#field-category').selectOption(type==='income'?'Freelance':'Food & groceries');await page.locator('#field-date').fill('2026-10-11');await page.locator('#transaction-form button[type="submit"]').click();await page.waitForFunction(()=>!document.querySelector('#modal').open);};
- const shot=async(name)=>{const file=`${root}/04_Canva_Presentation_Assets/Screenshots/${name}.png`;fs.mkdirSync(path.dirname(file),{recursive:true});await page.screenshot({path:file,fullPage:true});};
+ const shot=async(name)=>{const file=`${root}/screenshots/${name}.png`;fs.mkdirSync(path.dirname(file),{recursive:true});await page.screenshot({path:file,fullPage:true});};
  try{
  await go('overview');await page.evaluate(()=>localStorage.clear());await page.reload();
  await test('Dashboard loads with consistent fictional October totals',async()=>{assert.deepEqual(await page.locator('[data-metric]').allTextContents(),['₹1,59,201','₹52,500','₹20,049','₹32,451']);});
@@ -45,5 +45,5 @@ const reports=[];
  await test('Desktop, tablet and mobile screens have no horizontal overflow',async()=>{for(const width of [1440,1024,768,390,360]){await page.setViewportSize({width,height:900});for(const r of ['overview','transactions','budgets','analytics','goals','settings']){await go(r);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${r} at ${width}px overflows`);} } });
  await test('Mobile navigation opens and closes predictably',async()=>{await page.setViewportSize({width:390,height:844});await go('overview');await page.locator('[data-action="menu"]').first().click();await page.locator('.nav-item[href="#transactions"]').click();await page.locator('#search').waitFor();assert.equal(await page.locator('.sidebar').evaluate(el=>el.classList.contains('is-open')),false);assert.ok(await page.locator('#search').isVisible());});
  await test('No major browser console or page errors',async()=>assert.deepEqual(errors,[]));
- }finally{fs.mkdirSync(`${root}/03_HCI_Documentation`,{recursive:true});fs.writeFileSync(`${root}/03_HCI_Documentation/Browser_Test_Results.json`,JSON.stringify({date:'2026-10-11',browser:'Installed Google Chrome via Playwright',results:reports,errors},null,2));await browser.close();}
+ }finally{fs.mkdirSync(`${root}`,{recursive:true});fs.writeFileSync(`${root}/Browser_Test_Results.json`,JSON.stringify({date:'2026-10-11',browser:'Installed Google Chrome via Playwright',results:reports,errors},null,2));await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

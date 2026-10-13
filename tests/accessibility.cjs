@@ -1,7 +1,7 @@
 const {chromium}=require('playwright');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const root=require('node:path').resolve(__dirname,'../..');
-fs.mkdirSync(root+'/03_HCI_Documentation',{recursive:true});
+const root=require('node:path').resolve(__dirname,'../test-results/accessibility');
+fs.mkdirSync(root,{recursive:true});
 (async()=>{const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});const page=await browser.newPage({viewport:{width:1440,height:1080}}),results=[],errors=[];
 page.on('pageerror',e=>errors.push(e.message));
 const go=async(route)=>{const url='http://127.0.0.1:4173/#'+route;await page.goto(url);if(await page.locator('#login-form').count()){await page.locator('#auth-email').fill('demo@finora.com');await page.locator('#auth-password').fill('Finora@123');await page.locator('#login-form button[type=submit]').click();await page.waitForSelector('.sidebar');await page.goto(url);}await page.evaluate(()=>document.fonts.ready);};
@@ -18,5 +18,5 @@ await test('Core light and dark text color pairs meet 4.5:1 contrast',async()=>{
 await test('Corrupt local data displays recovery notice and valid demo',async()=>{await page.evaluate(()=>localStorage.setItem('finora-demo-v1','{bad'));await go('overview');await page.reload();assert.match(await page.locator('.notice[role="alert"]').innerText(),/could not be read/);assert.equal(await page.locator('[data-metric="balance"]').textContent(),'₹1,59,201');await page.evaluate(()=>localStorage.clear());await page.reload();});
 await test('Storage write failure displays unsaved-change warning',async()=>{await go('settings');await page.evaluate(()=>{Storage.prototype.setItem=function(){throw new DOMException('Blocked','QuotaExceededError');};});await page.locator('#profile-name').fill('Storage QA');await page.locator('#profile-form button').click();assert.match(await page.locator('main .notice[role="alert"]').innerText(),/not saved/);});
 await test('All sections reflow without horizontal overflow at 320px',async()=>{await page.setViewportSize({width:320,height:844});for(const r of ['overview','transactions','budgets','analytics','goals','settings']){await go(r);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),r);}});
-assert.deepEqual(errors,[]);fs.writeFileSync(`${root}/03_HCI_Documentation/Accessibility_Test_Results.json`,JSON.stringify({date:'2026-10-11',browser:'Installed Google Chrome via Playwright',results,contrast,errors},null,2));await browser.close();if(results.some(r=>r.status==='FAIL'))process.exitCode=1;
+assert.deepEqual(errors,[]);fs.writeFileSync(`${root}/Accessibility_Test_Results.json`,JSON.stringify({date:'2026-10-11',browser:'Installed Google Chrome via Playwright',results,contrast,errors},null,2));await browser.close();if(results.some(r=>r.status==='FAIL'))process.exitCode=1;
 })().catch(e=>{console.error(e);process.exit(1);});

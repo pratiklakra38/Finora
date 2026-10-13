@@ -21,3 +21,10 @@ qa/
 *.pdf
 *.docx
 *.fig
+
+# Local design files, working artifacts and migration backups
+HCI_CA3_Finora_Group/
+.21st/
+.chart-data-*/
+aesthetiq-skill/
+*.zip.sha256
