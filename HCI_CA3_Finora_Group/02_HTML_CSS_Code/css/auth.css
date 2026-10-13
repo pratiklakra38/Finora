@@ -28,7 +28,6 @@
 .auth-divider:before,.auth-divider:after{content:'';height:1px;background:var(--border);flex:1}
 .auth-google{background:var(--surface);color:var(--text);gap:10px}
 .google-logo{flex-shrink:0;display:block}
-.auth-google-note{font-size:11px;line-height:1.6;color:var(--muted);text-align:center;margin:10px 0 20px}
 .auth-demo-credentials{background:var(--soft);border-radius:6px;padding:14px 16px;font-size:12px;line-height:1.7}
 .auth-demo-credentials>strong{font-weight:600;color:var(--accent)}
 .auth-demo-credentials p{margin:5px 0 0;color:var(--muted)}
@@ -56,7 +55,6 @@
 .auth-demo-label{border-left:0;padding-left:0}
 .auth-demo-credentials{background:var(--bg);border:1px solid var(--border)}
 .auth-demo-credentials>strong{color:var(--text)}
-.auth-google-note{font-size:11px;line-height:1.65}
 .auth-footer p{max-width:570px;text-align:right;line-height:1.6}
 .auth-context p,.auth-copy-note{line-height:1.8}
 @media(max-width:800px){.auth-footer p{text-align:left}.auth-card h1{font-size:27px}}
