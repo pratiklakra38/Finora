@@ -1,1 +1,1 @@
-{"name":"finora-hci","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test tests/domain.test.js"}}
+{"name":"finora-hci","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test tests/domain.test.js tests/auth.test.js","test:auth":"node tests/demo-auth.cjs"}}
