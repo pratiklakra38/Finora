@@ -1,0 +1,62 @@
+/* Authentication UI only; the existing finance layouts remain in styles.css. */
+.auth-shell{min-height:100vh;max-width:1120px;margin:auto;padding:32px 0 24px;display:flex;flex-direction:column}
+.auth-header,.auth-footer{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.auth-header .brand{padding:0;margin:0;gap:10px}
+.auth-demo-label{font-size:12px;color:var(--muted);border-left:1px solid var(--border);padding-left:16px}
+.auth-content{display:grid;grid-template-columns:1fr 440px;gap:96px;align-items:center;padding:40px 0;flex:1;width:100%;outline:none}
+.auth-copy{max-width:420px}
+.auth-copy h2{font-size:40px;line-height:1.15;letter-spacing:-1.5px;font-weight:650;margin:16px 0 22px}
+.auth-intro{font-size:16px;line-height:1.75;color:var(--muted);max-width:385px;margin:0}
+.auth-context{display:flex;align-items:center;gap:16px;margin:36px 0 28px}
+.auth-context-rule{display:block;width:3px;height:44px;background:var(--accent)}
+.auth-context p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
+.auth-context strong{color:var(--text);font-weight:500}
+.auth-copy-note{font-size:12px;line-height:1.7;color:var(--muted);max-width:350px;margin:0}
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px}
+.auth-card h1{font-size:30px;line-height:1.2;letter-spacing:-1.1px;margin:0 0 10px;font-weight:650;outline:none}
+.auth-description{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 26px}
+.auth-form{display:flex;flex-direction:column;gap:18px}
+.auth-field{display:flex;flex-direction:column;gap:7px}
+.auth-field label{font-size:12px;font-weight:500}
+.auth-field input{width:100%;height:44px;min-width:0}
+.auth-field .field-error{margin:0;font-size:12px;line-height:1.5}
+.auth-field .field-error:empty{display:none}
+.auth-field input[aria-invalid=true]{border-color:var(--negative)}
+.auth-submit,.auth-google{width:100%;justify-content:center;min-height:44px}
+.auth-submit{margin-top:2px}
+.auth-divider{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted);margin:22px 0 18px}
+.auth-divider:before,.auth-divider:after{content:'';height:1px;background:var(--border);flex:1}
+.auth-google{background:var(--surface);color:var(--text);gap:10px}
+.google-logo{flex-shrink:0;display:block}
+.auth-google-note{font-size:11px;line-height:1.6;color:var(--muted);text-align:center;margin:10px 0 20px}
+.auth-demo-credentials{background:var(--soft);border-radius:6px;padding:14px 16px;font-size:12px;line-height:1.7}
+.auth-demo-credentials>strong{font-weight:600;color:var(--accent)}
+.auth-demo-credentials p{margin:5px 0 0;color:var(--muted)}
+.auth-demo-credentials p span{color:var(--text)}
+.auth-switch{font-size:13px;text-align:center;margin:24px 0 0;color:var(--muted)}
+.auth-switch a{font-weight:600;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.auth-registration-note{font-size:12px;line-height:1.6;color:var(--muted);margin:18px 0 0}
+.auth-footer{font-size:11px;color:var(--muted);line-height:1.5;border-top:1px solid var(--border);padding-top:20px}
+.auth-footer p{margin:0}
+.auth-errors,.auth-notice{font-size:12px;line-height:1.6;margin:0 0 20px;padding:12px 14px;border-radius:6px}
+.auth-errors{background:var(--warning-bg);color:var(--negative);border:1px solid var(--negative)}
+.auth-notice{background:var(--soft);color:var(--accent)}
+.auth-errors[hidden],.auth-notice[hidden]{display:none}
+.auth-session-panel p:last-child{margin-bottom:0}
+@media(max-width:1200px){.auth-shell{margin:0 40px}.auth-content{gap:64px}}
+@media(max-width:800px){.auth-shell{max-width:480px;margin:auto;padding:24px}.auth-content{display:block;padding:32px 0}.auth-copy{display:none}.auth-header .brand{display:flex}.auth-footer{align-items:flex-start;flex-direction:column;gap:8px}.auth-card{padding:28px}.auth-card h1{font-size:28px}}
+
+/* Refine existing auth elements without changing the form or page structure. */
+.auth-copy h2{font-size:36px;font-weight:600;line-height:1.2;letter-spacing:-1.15px}
+.auth-intro{font-size:15px;line-height:1.8}
+.auth-card{box-shadow:0 1px 3px #15233208}
+.auth-card h1{font-size:28px;font-weight:600;letter-spacing:-.7px;line-height:1.25}
+.auth-description,.auth-switch{font-size:13px;line-height:1.65}
+.auth-field label{font-size:12px;font-weight:600}
+.auth-demo-label{border-left:0;padding-left:0}
+.auth-demo-credentials{background:var(--bg);border:1px solid var(--border)}
+.auth-demo-credentials>strong{color:var(--text)}
+.auth-google-note{font-size:11px;line-height:1.65}
+.auth-footer p{max-width:570px;text-align:right;line-height:1.6}
+.auth-context p,.auth-copy-note{line-height:1.8}
+@media(max-width:800px){.auth-footer p{text-align:left}.auth-card h1{font-size:27px}}
