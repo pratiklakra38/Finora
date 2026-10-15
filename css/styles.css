@@ -59,3 +59,5 @@ input:not([type=checkbox]):not([type=radio])[aria-invalid=true],select[aria-inva
 .app-footer{font-size:11px}
 @media(min-width:621px){.axis{font-size:17px}.axis[transform]{text-anchor:middle;translate:-22px 0}.chart svg{overflow:visible}.point-tooltip{font-size:15px}}
 @media(max-width:620px){.balance-breakdown span{font-size:11px}.balance-context{font-size:10px}.transaction-name strong{font-size:12px}.transaction-table .amount-col{font-size:12px}.date-filters label,.transaction-filters>label{font-size:11px}.section-head p,.chart-note,.budget-status{font-size:11px}.goal-card>p,.goal-progress{font-size:11px}}
+
+.budget-card-actions{display:flex;align-items:center;gap:4px}
